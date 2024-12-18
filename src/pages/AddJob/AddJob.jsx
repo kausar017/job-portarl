@@ -1,10 +1,14 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const AddJob = () => {
 
     const { user } = useAuth();
+
+    const navigate = useNavigate()
+
 
     const handleAddJob = e => {
         e.preventDefault();
@@ -19,7 +23,7 @@ const AddJob = () => {
         newJob.responsibilities = newJob.responsibilities.split('\n')
         console.log(newJob);
 
-        fetch('http://localhost:5000/jobs', {
+        fetch('https://job-portal-server-r8mm3169l-kausar017s-projects.vercel.app/jobs', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

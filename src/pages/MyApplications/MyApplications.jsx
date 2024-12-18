@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
+import axios from 'axios';
 
 const MyApplications = () => {
     const { user } = useAuth();
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/job-application?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => setJobs(data))
+        // fetch(`https://job-portal-server-r8mm3169l-kausar017s-projects.vercel.app/job-application?email=${user.email}`)
+        //     .then(res => res.json())
+        //     .then(data => setJobs(data))    
+
+        axios.get(`https://job-portal-server-r8mm3169l-kausar017s-projects.vercel.app/job-application?email=mdkousarmia71@gmail.com`, { withCredentials: true })
+            .then(res => {
+                console.log(res.data)
+                setJobs(res.data)
+            })
+
     }, [user.email])
 
     return (
